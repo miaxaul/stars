@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For you to let it go</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #2F3645;
+      color: #FFCDB2;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #FFB4A2;
+      transition: all 1s ease;
+    }
+
+    textarea {
+      width: 80%;
+      max-width: 500px;
+      height: 150px;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      resize: none;
+      background-color: #B5828C;
+      color: #2F3645;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: all 1s ease;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background-color: #FFB4A2;
+      color: #2F3645;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #FFCDB2;
+    }
+
+    .fade-out {
+      animation: fadeOut 2s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.95); }
+    }
+
+    .affirmation {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #B5828C;
+      border-radius: 15px;
+      max-width: 500px;
+      text-align: center;
+      font-size: 1.3rem;
+      display: none;
+      color: #2F3645;
+      position: relative;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .emoji {
+      font-size: 1.5rem;
+      position: absolute;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .e1 { top: -20px; left: -30px; animation-delay: 0s; }
+    .e2 { top: -20px; right: -30px; animation-delay: 0.5s; }
+    .e3 { bottom: -20px; left: -20px; animation-delay: 1s; }
+    .e4 { bottom: -20px; right: -20px; animation-delay: 1.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1 id="mainTitle">Let it go 🍃</h1>
+  <p id="instruction">tulis apa pun yang ingin kamu lepaskan hari ini yaa （*＾-＾*）</p>
+  <textarea id="worryInput" placeholder="tulis di sini..."></textarea>
+  <button onclick="letItGo()">lepaskan</button>
+
+  <div id="affirmationBox" class="affirmation">
+    <span class="emoji e1">🌞</span>
+    <span class="emoji e2">🌸</span>
+    <span class="emoji e3">☁️</span>
+    <span class="emoji e4">⭐</span>
+    <div id="affirmationText"></div>
+  </div>
+
+  <script>
+    const affirmations = [
+      "You are enough, you are amazing.",
+      "Pelan-pelan.. nikmati dan jalani dulu proses usahanya, jangan lupa doa ya.",
+      "kata Hindia di lagu Mata Air: Berikan tenggat waktu, bersedihlah secukupnya, Rayakan perasaanmu sebagai manusia",
+      "Evaluasi - Hindia: perjalanan yang jauh, Kau bangun untuk bertaruh. semangattt (*^▽^*)",
+      "everthing will be okay in the end. if it not okay, its not the end.",
+      "when you start to loving yourself, life starts loving you too",
+      "everything happen for a reason.",
+      "I know your hope is heavy, But you'll get over it.. its okay to take a break",
+    ];
+
+    function letItGo() {
+      const input = document.getElementById("worryInput");
+      const title = document.getElementById("mainTitle");
+      const instruction = document.getElementById("instruction");
+
+      if (input.value.trim() === "") {
+        alert("Tulis sesuatu dulu ya 🥺");
+        return;
+      }
+
+      // Fade out textarea & text
+      input.classList.add("fade-out");
+      instruction.classList.add("fade-out");
+
+      // Ganti judul & munculkan affirmation
+      setTimeout(() => {
+        input.style.display = "none";
+        instruction.style.display = "none";
+        document.querySelector("button").style.display = "none";
+
+        title.innerText = "Daily Affirmation 💖";
+        title.style.color = "#FFCDB2";
+
+        const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+        document.getElementById("affirmationText").innerText = `✨ ${randomAffirmation}`;
+        document.getElementById("affirmationBox").style.display = "block";
+
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
